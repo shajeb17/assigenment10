@@ -22,12 +22,17 @@ async function run() {
     await client.connect();
     const database = client.db("assigenment10");
     const alluser = database.collection("alluser");
-    
-    app.get("/alluser", async(req,res)=>{
-        let cursor=await alluser.find().toArray()
-        res.send(cursor)
-    })
-   
+
+    app.get("/alluser", async (req, res) => {
+      let cursor = alluser.find().sort({ reminderTime: -1 }).limit(6);
+      let result = await cursor.toArray();
+      res.send(result);
+    });
+
+    app.post("/alluser", async (req, res) => {
+      let mainval = await alluser.insertOne(req.body);
+      res.send(mainval);
+    });
 
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged successfully");
