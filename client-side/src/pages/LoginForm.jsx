@@ -1,21 +1,25 @@
 import React, { use, useState } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "../uesContextHook/formhook/AuthContex";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
   let { handleSinin, handleSigninGoogle } = use(AuthContext);
   let [email, setEmail] = useState();
+
   let handleClick = (e) => {
     e.preventDefault();
     let email = e.target.email.value;
     let password = e.target.password.value;
-    handleSinin(email, password).then((result) => console.log(result));
+    handleSinin(email, password)
+      .then((result) => toast.success("Login success"))
+      .catch((e) => toast.error(e.message));
   };
 
   let handleGoogle = () => {
     handleSigninGoogle()
-      // .then((result) => console.log(result))
-      // .catch((e) => console.log(e));
+      .then((result) => toast.success("Login success"))
+      .catch((e) => toast.error(e.message));
   };
 
   return (
@@ -49,7 +53,9 @@ const LoginForm = () => {
                   Forgot password?
                 </Link>
               </div>
-              <button className="btn btn-primary mt-4 w-full">Login</button>
+              <button className="btn bg-linear-to-r from-purple-500 to-[#00a9ff] text-[16px] text-white font-semibold mt-4 w-full">
+                Login
+              </button>
               <button
                 onClick={handleGoogle}
                 className="btn bg-white text-black w-full mt-3 border-[#e5e5e5]"
