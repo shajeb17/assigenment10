@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import Logo from "./Logo";
 
 const Navbar = () => {
@@ -19,7 +19,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <button className="btn bg-linear-to-r from-purple-500 to-[#00a9ff] text-[16px] text-white font-semibold px-9 py-4">LogIn</button>
+        <Link to={"login"} className="btn bg-linear-to-r from-purple-500 to-[#00a9ff] text-[16px] text-white font-semibold px-9 py-4">LogIn</Link>
       </div>
     </div>
   );

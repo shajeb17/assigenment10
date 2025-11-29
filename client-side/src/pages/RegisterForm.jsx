@@ -1,15 +1,10 @@
-import React, { use, useEffect } from "react";
-import { Link } from "react-router";
-import Footer from "../component/Footer";
-import NavBar from "../component/NavBar";
+import { use } from "react";
 import { AuthContext } from "../uesContextHook/formhook/AuthContex";
-import { updateProfile } from "firebase/auth";
+import { Link } from "react-router";
+
 
 const RegisterForm = () => {
   let { handleRegister } = use(AuthContext);
-       useEffect(() => {
-         document.title = "Gamehub :RegistePage";
-       }, []);
   let handleClick = (e) => {
     e.preventDefault();
     let email = e.target.email.value;
@@ -36,7 +31,6 @@ const RegisterForm = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <NavBar></NavBar>
       <div className="flex-1">
         <div className="m-auto flex items-center justify-center w-full h-screen ">
           <div className="card  max-w-sm shrink-0 shadow-2xl">
@@ -83,7 +77,7 @@ const RegisterForm = () => {
                 </button>
                 <p className="mt-4 text-yellow-200">
                   Opps! i Have a Account?{" "}
-                  <Link to={"/pagelayout"} className="text-blue-400">
+                  <Link to={"/login"} className="text-blue-400">
                     Please Login
                   </Link>
                 </p>
@@ -92,7 +86,6 @@ const RegisterForm = () => {
           </div>
         </div>
       </div>
-      <Footer></Footer>
     </div>
   );
 };

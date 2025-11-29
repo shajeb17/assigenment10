@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { AuthContext } from './AuthContex';
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
-import { auth } from '../../firebase/firebaseconfig';
-import { GoogleAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth/web-extension";
+import { useEffect, useState } from "react";
+import { auth } from "../../firebase/firebse";
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { AuthContext } from "./AuthContex";
+
 
 const provider = new GoogleAuthProvider();
 const AuthProvider = ({children}) => {
