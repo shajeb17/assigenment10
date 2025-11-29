@@ -8,10 +8,10 @@ const Navbar = () => {
 
   let links = (
     <div className="space-x-4 text-[15px] font-semibold text-black/70">
-      <NavLink>Home</NavLink>
-      <NavLink>Add Habit</NavLink>
-      <NavLink> My Habits</NavLink>
-      <NavLink>Browse Public Habits</NavLink>
+      <NavLink to={"/"}>Home</NavLink>
+      <NavLink to={"addhabit"}>Add Habit</NavLink>
+      <NavLink to={"myhabit"}> My Habits</NavLink>
+      <NavLink to={"publichabit"}>Browse Public Habits</NavLink>
     </div>
   );
   let handleClick = () => {
@@ -20,9 +20,9 @@ const Navbar = () => {
   };
   return (
     <div className="navbar bg-base-100 shadow-sm">
-      <div className="navbar-start capitalize ">
+      <Link to={"/"} className="navbar-start capitalize ">
         <Logo></Logo>
-      </div>
+      </Link>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>

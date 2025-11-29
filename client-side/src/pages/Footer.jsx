@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-linear-to-r from-purple-600 to-[#00a9ff] text-white pt-14 pb-8 mt-16">
+    <footer className="bg-linear-to-r from-purple-600 to-[#00a9ff] text-white pt-14 pb-8">
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
         <div>
           <h1 className="text-3xl font-bold mb-3">HabitTrack</h1>

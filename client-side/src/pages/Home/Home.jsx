@@ -4,12 +4,13 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import DetailsCard from './DetailsCard';
 import Counter from './Counter';
+import Story from './Story';
 
 const Home = () => {
     return (
         <div>
            <div>
-            <Carousel>
+            <Carousel showThumbs={false}>
                 <div>
                   <Hero></Hero>
                 </div>
@@ -24,6 +25,7 @@ const Home = () => {
 
            <DetailsCard></DetailsCard>
            <Counter></Counter>
+           <Story></Story>
         </div>
     );
 };
