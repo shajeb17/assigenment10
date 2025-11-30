@@ -15,7 +15,7 @@ const Myhabit = () => {
   //     .then((res) => myData(res));
   // }, [userInfo]);
 
-    const loadData = () => {
+  const loadData = () => {
     fetch(`http://localhost:3000/mydata?email=${users}`)
       .then((result) => result.json())
       .then((res) => myData(res));
@@ -25,7 +25,20 @@ const Myhabit = () => {
     if (users) loadData();
   }, [users]);
 
+  let handleDelete = (id) => {
+    console.log(id);
 
+    fetch(`http://localhost:3000/mydata/${id}`, {
+      method: "DELETE",
+    })
+      .then((result) => result.json())
+      .then((value) => {
+        if (value.deletedCount) {
+          let del = data.filter((data) => data?._id !== id);
+          myData(del);
+        }
+      });
+  };
   const openModal = (habit) => {
     setSelectedHabit(habit);
     const modal = document.getElementById("update_modal");
@@ -68,7 +81,10 @@ const Myhabit = () => {
               <Pencil size={16} /> Update
             </button>
 
-            <button className="flex items-center gap-1 bg-green-500 text-white px-3 py-2 rounded-lg hover:bg-red-600">
+            <button
+              onClick={() => handleDelete(result?._id)}
+              className="flex items-center gap-1 bg-green-500 text-white px-3 py-2 rounded-lg hover:bg-red-600"
+            >
               <Trash2 size={16} /> Delete
             </button>
           </div>
