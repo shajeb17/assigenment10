@@ -2,6 +2,8 @@ import { use } from "react";
 import { AuthContext } from "../uesContextHook/formhook/AuthContex";
 import { Link } from "react-router";
 import { toast } from "react-toastify";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../firebase/firebse";
 
 const RegisterForm = () => {
   let { handleRegister, handleSigninGoogle } = use(AuthContext);
@@ -11,6 +13,10 @@ const RegisterForm = () => {
     let email = e.target.email.value;
     let password = e.target.password.value;
 
+    let profile={
+     displayName : e.target.text.value,
+     photoURL : e.target.image.value
+    }
     let expression = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
 
     if (!expression.test(password)) {
@@ -21,13 +27,23 @@ const RegisterForm = () => {
     }
 
     handleRegister(email, password)
-      .then((result) => toast.success("register success"))
+      .then(() =>( 
+        updateProfile(auth.currentUser,profile),
+        toast.success("register success")),
+        e.target.reset()
+    )
       .catch((e) => toast.error(e.message));
   };
 
   let handleGoogle = () => {
     handleSigninGoogle()
-      .then((result) => toast.success("register success"))
+      .then(
+        () => toast.success("register success"),
+        updateProfile(auth.currentUser, {
+          displayName,
+          photoURL,
+        })
+      )
       .catch((e) => toast.error(e.message));
   };
 
@@ -46,6 +62,7 @@ const RegisterForm = () => {
                   type="text"
                   className="input  outline-0 "
                   placeholder="Your Name"
+                  required
                   name="text"
                 />
 
@@ -54,6 +71,7 @@ const RegisterForm = () => {
                   type="text"
                   className="input  outline-0 "
                   name="image"
+                  required
                   placeholder="image link"
                 />
 
@@ -78,7 +96,7 @@ const RegisterForm = () => {
                   Register
                 </button>
                 <button
-                 type="button"
+                  type="button"
                   onClick={handleGoogle}
                   className="btn bg-white text-black w-full mt-3 border-[#e5e5e5]"
                 >
