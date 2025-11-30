@@ -35,6 +35,13 @@ async function run() {
       let result = await cursor.toArray();
       res.send(result);
     });
+
+    app.get("/alldata", async (req, res) => {
+      let cursor = alluser.find();
+      let result = await cursor.toArray();
+      res.send(result);
+    });
+
     app.patch("/mydata/:id", async (req, res) => {
       let value = req.params.id;
       let update = req.body;
@@ -53,7 +60,12 @@ async function run() {
       const setdata = await alluser.updateOne(query, userupdate);
       res.send(setdata);
     });
-    
+    app.delete("/mydata/:id", async (req, res) => {
+      let id = req.params.id;
+      let query = { _id: new ObjectId(id) };
+      let result = await alluser.deleteOne(query);
+      res.send(result);
+    });
     app.post("/alluser", async (req, res) => {
       let mainval = await alluser.insertOne(req.body);
       res.send(mainval);
