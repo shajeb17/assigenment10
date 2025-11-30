@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const app = express();
 const port = 3000;
 
@@ -29,6 +29,31 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/mydata", async (req, res) => {
+      let email = req.query.email;
+      let cursor = alluser.find({ userEmail: email });
+      let result = await cursor.toArray();
+      res.send(result);
+    });
+    app.patch("/mydata/:id", async (req, res) => {
+      let value = req.params.id;
+      let update = req.body;
+      let query = { _id: new ObjectId(value) };
+
+      let userupdate = {
+        $set: {
+          habitTitle: update.habitTitle,
+          description: update.description,
+          category: update.category,
+          reminderTime: update.reminderTime,
+          userEmail: update.userEmail,
+          userName: update.userName,
+        },
+      };
+      const setdata = await alluser.updateOne(query, userupdate);
+      res.send(setdata);
+    });
+    
     app.post("/alluser", async (req, res) => {
       let mainval = await alluser.insertOne(req.body);
       res.send(mainval);
