@@ -5,15 +5,26 @@ import { AuthContext } from "../../uesContextHook/formhook/AuthContex";
 import UpdateHabit from "../UpdateHabit";
 
 const Myhabit = () => {
-  let [data, myData] = useState();
+  let [data, myData] = useState([]);
   let { userInfo } = use(AuthContext);
   let [selectedHabit, setSelectedHabit] = useState(null);
   let users = userInfo?.email;
-  useEffect(() => {
+  // useEffect(() => {
+  //   fetch(`http://localhost:3000/mydata?email=${users}`)
+  //     .then((result) => result.json())
+  //     .then((res) => myData(res));
+  // }, [userInfo]);
+
+    const loadData = () => {
     fetch(`http://localhost:3000/mydata?email=${users}`)
       .then((result) => result.json())
       .then((res) => myData(res));
-  }, [userInfo]);
+  };
+
+  useEffect(() => {
+    if (users) loadData();
+  }, [users]);
+
 
   const openModal = (habit) => {
     setSelectedHabit(habit);
@@ -63,7 +74,7 @@ const Myhabit = () => {
           </div>
         </div>
       ))}
-      <UpdateHabit habit={selectedHabit} />
+      <UpdateHabit habit={selectedHabit} refreshData={loadData} />
     </div>
   );
 };

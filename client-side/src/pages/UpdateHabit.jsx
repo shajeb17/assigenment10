@@ -1,17 +1,44 @@
 import React, { use } from "react";
 import { AuthContext } from "../uesContextHook/formhook/AuthContex";
+import { toast } from "react-toastify";
 
-const UpdateHabit = ({habit}) => {
-    console.log(habit);
-    
-    let {userInfo}=use(AuthContext)
+const UpdateHabit = ({ habit, refreshData }) => {
+  let { userInfo } = use(AuthContext);
+  let handleclick = (e) => {
+    e.preventDefault();
+    let habitTitle = e.target.habitTitle.value;
+    let description = e.target.description.value;
+    let category = e.target.category.value;
+    let reminderTime = e.target.reminderTime.value;
+    let userEmail = e.target.email.value;
+    let userName = e.target.text.value;
+    let user = {
+      habitTitle,
+      description,
+      category,
+      reminderTime,
+      userEmail,
+      userName,
+    };
+    fetch(`http://localhost:3000/mydata/${habit?._id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    })
+      .then((value) => value.json())
+      .then(
+        () =>{ toast.success("user info update successfully"),
+        refreshData(),
+        document.getElementById("update_modal").close()
+    })
+  };
   return (
     <div>
       <dialog id="update_modal" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <div className="max-w-md mx-auto p-6 my-9 bg-white rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-4">Update Habit</h2>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleclick}>
               <div>
                 <label className="block mb-1 font-semibold">
                   Update Habit Title
