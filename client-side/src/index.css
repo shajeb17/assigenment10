@@ -2,13 +2,15 @@
 
 @import "tailwindcss";
 @plugin "daisyui"{
-   themes: light --default, dark;
+   themes: light --default, dark ;
 }
+@custom-variant darkmode (&:where([data-theme=dark], [data-theme=dark] *));
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
    --color-primary: linear-gradient(to right, #8b5cf6, #00a9ff)
 }
+
 body{
   font-family: "Open Sans", sans-serif;
 }

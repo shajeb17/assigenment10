@@ -2,13 +2,13 @@ import { CheckCircle, Brain, Heart, Clock } from "lucide-react";
 
 const WhyBuildHabits = () => {
   return (
-    <section className="bg-[#f5f7ff] py-20">
+    <section className="bg-[#f5f7ff] darkmode:bg-base-100 py-20">
       <div className="max-w-6xl mx-auto px-6 text-center">
      
-        <h2 className="text-4xl font-bold text-gray-800">
+        <h2 className="text-4xl font-bold text-gray-800 darkmode:text-white ">
           Why Build <span className="text-purple-600">Habits?</span>
         </h2>
-        <p className="text-gray-600 mt-3 text-lg max-w-2xl mx-auto">
+        <p className="text-gray-600 mt-3 text-lg max-w-2xl mx-auto darkmode:text-white/80 ">
           Habits shape your daily routine and define your long-term success.
           Here’s how building good habits can improve your life.
         </p>

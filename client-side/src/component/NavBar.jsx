@@ -2,12 +2,13 @@ import { Link, NavLink } from "react-router";
 import Logo from "./Logo";
 import { use } from "react";
 import { AuthContext } from "../uesContextHook/formhook/AuthContex";
+import { PulseLoader } from "react-spinners";
 
 const Navbar = () => {
-  let { userInfo, handleSignout } = use(AuthContext);
+  let { userInfo, handleSignout, loading } = use(AuthContext);
 
   let links = (
-    <div className="space-x-4 text-[15px] font-semibold text-black/70">
+    <div className="space-x-4 text-[15px] font-semibold darkmode:text-white text-black/70">
       <NavLink to={"/"}>Home</NavLink>
       <NavLink to={"addhabit"}>Add Habit</NavLink>
       <NavLink to={"myhabit"}> My Habits</NavLink>
@@ -16,7 +17,6 @@ const Navbar = () => {
   );
   let handleClick = () => {
     handleSignout();
-    
   };
   return (
     <div className="navbar bg-base-100 shadow-sm">
@@ -28,7 +28,11 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         <div className="flex items-center gap-2 cursor-pointer">
-          {userInfo ? (
+          {loading ? (
+            <div>
+              <PulseLoader color="#6122e0" size={10} />
+            </div>
+          ) : userInfo ? (
             <div className="flex items-center gap-3">
               <div className="dropdown dropdown-start">
                 <div tabIndex={0} role="button" className="">
@@ -50,7 +54,12 @@ const Navbar = () => {
                   </div>
                 </ul>
               </div>
-              <button onClick={handleClick} className="btn  bg-linear-to-r from-purple-500 to-[#00a9ff] text-[16px] text-white">Sign out</button>
+              <button
+                onClick={handleClick}
+                className="btn  bg-linear-to-r from-purple-500 to-[#00a9ff] text-[16px] text-white"
+              >
+                Sign out
+              </button>
             </div>
           ) : (
             <Link

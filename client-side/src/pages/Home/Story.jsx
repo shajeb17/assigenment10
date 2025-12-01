@@ -2,9 +2,9 @@ import React from "react";
 
 const Story = () => {
   return (
-    <section className="bg-blue-50 py-8">
+    <section className="bg-blue-50 py-8 darkmode:bg-base-100 ">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
+        <h2 className="text-4xl font-bold text-center text-gray-800 darkmode:text-white mb-12">
           Success Stories
         </h2>
         <div className="grid md:grid-cols-2 gap-8">

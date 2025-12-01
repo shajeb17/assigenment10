@@ -34,7 +34,7 @@ const Addhabit = () => {
       .catch((e) => toast.error(e.message));
   };
   return (
-    <div className="max-w-md mx-auto p-6 my-9 bg-white rounded-lg shadow-md">
+    <div className="max-w-md mx-auto p-6 my-9 darkmode:text-black bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4">Add New Habit</h2>
       <form className="space-y-4" onSubmit={handleclick}>
         <div>
