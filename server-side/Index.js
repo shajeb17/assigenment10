@@ -8,7 +8,7 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 const uri =
-  `mongodb+srv://${process.env.DB.USER}:${process.env.USER.PASSWORD}@cluster0.wqmawes.mongodb.net/?appName=Cluster0`;
+  `mongodb+srv://${process.env.DB_USER}:${process.env.USER_PASSWORD}@cluster0.wqmawes.mongodb.net/?appName=Cluster0`;
 
 const client = new MongoClient(uri, {
   serverApi: {
