@@ -1,13 +1,14 @@
 const express = require("express");
 const cors = require("cors");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
+require("dotenv").config()
 const app = express();
 const port = 3000;
 
 app.use(cors());
 app.use(express.json());
 const uri =
-  "mongodb+srv://assigenment10:ZEjgwGkCCWIkZnxm@cluster0.wqmawes.mongodb.net/?appName=Cluster0";
+  `mongodb+srv://${process.env.DB.USER}:${process.env.USER.PASSWORD}@cluster0.wqmawes.mongodb.net/?appName=Cluster0`;
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -32,6 +33,14 @@ async function run() {
     app.get("/mydata", async (req, res) => {
       let email = req.query.email;
       let cursor = alluser.find({ userEmail: email });
+      let result = await cursor.toArray();
+      res.send(result);
+    });
+    app.get("/search", async (req, res) => {
+      let search = req.query.search;
+      let cursor = alluser.find({
+        habitTitle: { $regex: search, $options: "i" },
+      });
       let result = await cursor.toArray();
       res.send(result);
     });
