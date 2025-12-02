@@ -1,14 +1,38 @@
 const express = require("express");
 const cors = require("cors");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
-require("dotenv").config()
+const admin = require("firebase-admin");
+require("dotenv").config();
 const app = express();
 const port = 3000;
 
 app.use(cors());
 app.use(express.json());
-const uri =
-  `mongodb+srv://${process.env.DB_USER}:${process.env.USER_PASSWORD}@cluster0.wqmawes.mongodb.net/?appName=Cluster0`;
+
+const serviceAccount = require("./auth_adminhdk.json");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
+const loginuser = async (req, res, next) => {
+  let authentic = req.headers.authorization;
+  if (!authentic) {
+    return res.status(401).send({
+      message: "unauthorize token not found",
+    });
+  }
+  let token = authentic.split(" ")[1];
+  try {
+    let tok = await admin.auth().verifyIdToken(token);
+    next();
+  } catch (error) {
+    return res.status(401).send({
+      message: "unauthorize token not found",
+    });
+  }
+};
+
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.USER_PASSWORD}@cluster0.wqmawes.mongodb.net/?appName=Cluster0`;
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -30,7 +54,7 @@ async function run() {
       res.send(result);
     });
 
-    app.get("/mydata", async (req, res) => {
+    app.get("/mydata", loginuser, async (req, res) => {
       let email = req.query.email;
       let cursor = alluser.find({ userEmail: email });
       let result = await cursor.toArray();
