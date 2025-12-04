@@ -6,6 +6,8 @@ import DetailsCard from "./DetailsCard";
 import Counter from "./Counter";
 import Story from "./Story";
 import Card from "./Card";
+import HeroTwo from "./HeroTwo";
+import HeroThree from "./HeroThree";
 
 const Home = () => {
   let [data, myData] = useState();
@@ -23,10 +25,10 @@ const Home = () => {
             <Hero></Hero>
           </div>
           <div>
-            <Hero></Hero>
+            <HeroTwo></HeroTwo>
           </div>
           <div>
-            <Hero></Hero>
+            <HeroThree></HeroThree>
           </div>
         </Carousel>
       </div>

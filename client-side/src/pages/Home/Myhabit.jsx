@@ -17,8 +17,14 @@ const Myhabit = () => {
   //     .then((res) => myData(res));
   // }, [userInfo]);
 
+  
+  
   const loadData = () => {
-    fetch(`http://localhost:3000/mydata?email=${users}`)
+    fetch(`http://localhost:3000/mydata?email=${users}`,{
+      headers:{
+        authorization:`Bearer ${userInfo?.accessToken}`
+      }
+    })
       .then((result) => result.json())
       .then((res) => (myData(res) ,setLoadding(false)));
   };

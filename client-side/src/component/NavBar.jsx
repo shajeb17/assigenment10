@@ -48,9 +48,9 @@ const Navbar = () => {
                   <div>
                     <div className="flex"> Name :{userInfo.displayName}</div>
                     <div className="flex"> Email :{userInfo?.email}</div>
-                    <Link to={"/updateInfo"} className="btn btn-secondary mt-3">
-                      Update Information
-                    </Link>
+                    <button onClick={handleSignout} className="bg-linear-to-r from-purple-500 to-[#00a9ff] w-full text-[15px] font-semibold rounded py-1.5 mt-2">
+                      Log out
+                    </button>
                   </div>
                 </ul>
               </div>
