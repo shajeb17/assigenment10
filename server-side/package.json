@@ -1,0 +1,24 @@
+{
+  "name": "server-side",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+<<<<<<< HEAD
+    "start": "node index.js"
+=======
+      "start": "node index.js"
+>>>>>>> f1e6c559d8b5bbf396887fbc528b2cc579554c46
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "firebase-admin": "^13.6.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^7.0.0"
+  }
+}

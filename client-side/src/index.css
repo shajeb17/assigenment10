@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+@import "tailwindcss";
+@plugin "daisyui"{
+   themes: light --default, dark ;
+}
+@custom-variant darkmode (&:where([data-theme=dark], [data-theme=dark] *));
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+   --color-primary: linear-gradient(to right, #8b5cf6, #00a9ff)
+}
+
+body{
+  font-family: "Open Sans", sans-serif;
+}
