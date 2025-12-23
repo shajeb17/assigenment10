@@ -7,11 +7,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
     "start": "node index.js"
-=======
-      "start": "node index.js"
->>>>>>> f1e6c559d8b5bbf396887fbc528b2cc579554c46
   },
   "dependencies": {
     "cors": "^2.8.5",

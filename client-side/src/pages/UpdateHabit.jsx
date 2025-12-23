@@ -20,11 +20,7 @@ const UpdateHabit = ({ habit, refreshData }) => {
       userEmail,
       userName,
     };
-<<<<<<< HEAD
     fetch(`http://localhost:3000/mydata/${habit?._id}`, {
-=======
-    fetch(`https://server-side-ten-phi.vercel.app/mydata/${habit?._id}`, {
->>>>>>> f1e6c559d8b5bbf396887fbc528b2cc579554c46
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),

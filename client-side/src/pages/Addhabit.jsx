@@ -22,11 +22,7 @@ const Addhabit = () => {
       userEmail,
       userName,
     };
-<<<<<<< HEAD
     fetch("http://localhost:3000/alluser", {
-=======
-    fetch("https://server-side-ten-phi.vercel.app/alluser", {
->>>>>>> f1e6c559d8b5bbf396887fbc528b2cc579554c46
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),

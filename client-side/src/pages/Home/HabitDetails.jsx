@@ -7,11 +7,7 @@ const HabitDetails = () => {
   let habit = data.state;
 
   let handleClick = (id) => {
-<<<<<<< HEAD
     fetch(`http://localhost:3000/habitcomplete/${id}`, {
-=======
-    fetch(`https://server-side-ten-phi.vercel.app/habitcomplete/${id}`, {
->>>>>>> f1e6c559d8b5bbf396887fbc528b2cc579554c46
       method: "PATCH",
     })
       .then((res) => res.json())

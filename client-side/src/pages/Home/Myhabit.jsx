@@ -31,7 +31,7 @@ const Myhabit = () => {
 
   useEffect(() => {
     if (users) loadData();
-  }, [users]);
+  }, [userInfo]);
 
   let handleDelete = (id) => {
     fetch(`http://localhost:3000/mydata/${id}`, {
