@@ -22,7 +22,8 @@ const Myhabit = () => {
   const loadData = () => {
     fetch(`http://localhost:3000/mydata?email=${users}`,{
       headers:{
-        authorization:`Bearer ${userInfo?.accessToken}`
+        // authorization:`Bearer ${userInfo?.accessToken}`
+        authorization:`Bearer ${localStorage.getItem("token")}`
       }
     })
       .then((result) => result.json())

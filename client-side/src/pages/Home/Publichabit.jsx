@@ -12,7 +12,8 @@ const Publichabit = () => {
     if(!userInfo?.accessToken) return
     fetch("http://localhost:3000/alldata",{
       headers:{
-        authorization:`Bearer ${userInfo?.accessToken}`
+        // authorization:`Bearer ${userInfo?.accessToken}`
+        authorization : `Bearer ${localStorage.getItem("token")}`
       }
     })
       .then((res) => res.json())

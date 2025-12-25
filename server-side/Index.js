@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 require("dotenv").config();
+var jwt = require('jsonwebtoken');
 const app = express();
 const port =process.env.PORT|| 3000
 app.use(cors());
@@ -35,6 +36,34 @@ const verifyFirebaseToken = async (req, res, next) => {
   }
 
 };
+
+
+
+const verifyToken = (req, res, next) => {
+ 
+  let authentic = req.headers.authorization;
+  if (!authentic) {
+    return res.status(401).send({ message: "No token" });
+  }
+
+
+   let token = req.headers.authorization.split(" ")[1];
+  if(!token){
+    return res.status(401).send({message:"access token not found"})
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(403).send({ message: "Invalid token" });
+    }
+    req.token_email=decoded.email
+    next();
+  });
+};
+
+
+
+
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.USER_PASSWORD}@cluster0.wqmawes.mongodb.net/?appName=Cluster0`;
 
 const client = new MongoClient(uri, {
@@ -57,12 +86,19 @@ async function run() {
       res.send(result);
     });
 
-    app.get("/mydata", verifyFirebaseToken, async (req, res) => {
+    app.get("/mydata",verifyToken,async (req, res) => {
       
       let email = req.query.email;
+      
+      // if(email!==req.token_email){
+      //   return res.status(403).send({message:"forbidden access"})
+      // }
+
+
       if(email!==req.token_email){
         return res.status(403).send({message:"forbidden access"})
       }
+
       let cursor = alluser.find({ userEmail: email });
       let result = await cursor.toArray();
       res.send(result);
@@ -76,7 +112,7 @@ async function run() {
       res.send(result);
     });
 
-    app.get("/alldata", verifyFirebaseToken, async (req, res) => {
+    app.get("/alldata", verifyToken, async (req, res) => {
       let cursor = alluser.find();
       let result = await cursor.toArray();
       res.send(result);
@@ -136,6 +172,17 @@ async function run() {
       let mainval = await alluser.insertOne(req.body);
       res.send(mainval);
     });
+
+    app.post("/getToken", (req,res)=>{
+      let loginUser=req.body; 
+      const token=jwt.sign(
+        loginUser,
+         process.env.JWT_SECRET,
+        {expiresIn:"1h"}
+      )
+      res.send({token:token})
+    })
+
   } finally {
   }
 }
